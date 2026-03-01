@@ -39,9 +39,9 @@ a:hover{opacity:.92}
 
 .header{
   position:sticky; top:0; z-index:100;
-  background: rgba(10,22,48,.88);
+  background: rgba(10,22,48,.92);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(201,162,39,.28);
+  border-bottom: 1px solid rgba(201,162,39,.22);
 }
 .header::before{
   content:"";
@@ -54,8 +54,8 @@ a:hover{opacity:.92}
 .header::after{
   content:"";
   display:block;
-  height:1px;
-  background: rgba(179,25,66,.35);
+  height:2px;
+  background: rgba(201,162,39,.65);
 }
 .header__inner{
   display:flex;
@@ -68,7 +68,8 @@ a:hover{opacity:.92}
   display:flex;
   align-items:center;
   gap:10px;
-}.brand__logo{
+}
+.brand__logo{
   height:46px;
   width:auto;
   display:block;
@@ -85,12 +86,27 @@ a:hover{opacity:.92}
   font-size:18px;
   font-weight:bold;
 }
-.brand__text{display:flex; flex-direction:column; font-size:14px}
+.brand__text strong{
+  font-size:15px;
+  letter-spacing:.02em;
+}
+.brand__text span{
+  color: rgba(255,255,255,.70);
+  font-size:12px;
+}
 .brand__text span{color:var(--muted); font-size:12px}
 
 .nav{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
-.nav a{padding:8px 10px; border-radius:12px}
-.nav a:hover{background:rgba(255,255,255,.06)}
+.nav a{
+  padding:8px 10px;
+  border-radius:10px;
+  color: rgba(255,255,255,.88);
+  font-weight:600;
+  letter-spacing:.01em;
+}
+.nav a:hover{
+  background: rgba(255,255,255,.06);
+}
 
 .main{padding:34px 0 56px}
 
@@ -143,7 +159,17 @@ a:hover{opacity:.92}
 .btn--primary:hover{
   filter: brightness(1.03);
 }
-.btn--small{padding:8px 10px; border-radius:12px}
+.btn--small{
+  padding:8px 12px;
+  border-radius:12px;
+}
+.nav .btn{
+  border: 1px solid rgba(201,162,39,.45);
+  background: rgba(201,162,39,.08);
+}
+.nav .btn:hover{
+  background: rgba(201,162,39,.14);
+}
 
 .pill{
   display:inline-flex; gap:8px; align-items:center;
@@ -181,4 +207,10 @@ a:hover{opacity:.92}
   padding: 28px 0 18px;
   background: #071026;
   box-shadow: 0 -18px 40px rgba(0,0,0,.35);
+}
+
+.h2rule{
+  display:inline-block;
+  padding-bottom:8px;
+  border-bottom:2px solid rgba(201,162,39,.55);
 }
