@@ -2,34 +2,72 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Post 394 Home">
+<BaseLayout title="American Legion Post 394 • Palm Bay">
+  <div class="container">
+    <section class="hero">
+      <div class="card">
+        <div class="pad">
+          <div class="kicker">Community • Service • Veterans</div>
+          <h1 class="h1">Veterans Serving Veterans — Right Here in Palm Bay</h1>
+          <p class="muted">
+            Post 394 is a local hub for veteran support, community events, and service opportunities.
+            Join us, attend an event, or get help navigating benefits.
+          </p>
 
-<div class="hero">
-<h1>Supporting Veterans. Serving Palm Bay. Building Community.</h1>
-<p>American Legion Post 394 is a local hub for veteran support, community events, and outreach.</p>
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn btn--primary" href="/join">Join the Legion</a>
+            <a class="btn" href="/get-help">Get Help</a>
+            <a class="btn" href="/events">See Events</a>
+            <a class="btn" href="/hall">Rent the Hall</a>
+          </div>
 
-  <a class="btn" href="/join">Join Us</a>
-  <a class="btn" href="/hall">Rent Our Hall</a>
-</div>
+          <div style="margin-top:12px">
+            <span class="pill">✅ Veteran assistance</span>
+            <span class="pill">🎟️ Community events</span>
+            <span class="pill">🏛️ Hall rentals</span>
+          </div>
+        </div>
+      </div>
 
-<div class="section">
-  <h2>Need VA Help?</h2>
-  <p>Our Service Officer is here to help veterans navigate benefits.</p>
-</div>
+      <div class="card">
+        <div class="pad">
+          <h2 style="margin:0 0 8px;">This Week at Post 394</h2>
+          <p class="muted" style="margin:0 0 14px;">
+            Replace these with real recurring events later.
+          </p>
+          <ul class="muted">
+            <li><strong>Bingo Night</strong> • Tue 6:30 PM</li>
+            <li><strong>Karaoke</strong> • Fri 7:00 PM</li>
+            <li><strong>Service Officer Hours</strong> • Wed 10–2</li>
+          </ul>
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn btn--small" href="/events">Full Calendar</a>
+            <a class="btn btn--small" href="/contact">Contact</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<div class="section">
-  <h2>Community Events</h2>
-  <p>Bingo, Karaoke, and more.</p>
-</div>
+    <section class="section" style="margin-top:18px;">
+      <div class="grid">
+        <div class="card"><div class="pad">
+          <h2>Need VA Help?</h2>
+          <p class="muted">Connect with a Service Officer for resources and guidance.</p>
+          <div style="margin-top:12px"><a class="btn btn--small" href="/get-help">Get Help</a></div>
+        </div></div>
 
-<div class="section">
-  <h2>What We Offer</h2>
-  <ul>
-    <li>Veteran assistance and advocacy</li>
-    <li>Community events and gatherings</li>
-    <li>Affordable hall rentals</li>
-    <li>Volunteer opportunities</li>
-  </ul>
-</div>
+        <div class="card"><div class="pad">
+          <h2>Events & Community</h2>
+          <p class="muted">See what’s happening this week and bring friends. Everyone is welcome.</p>
+          <div style="margin-top:12px"><a class="btn btn--small" href="/events">View Events</a></div>
+        </div></div>
 
+        <div class="card"><div class="pad">
+          <h2>Rent Our Hall</h2>
+          <p class="muted">Host your event with us. Ask about amenities and availability.</p>
+          <div style="margin-top:12px"><a class="btn btn--small" href="/hall">Hall Rental Info</a></div>
+        </div></div>
+      </div>
+    </section>
+  </div>
 </BaseLayout>

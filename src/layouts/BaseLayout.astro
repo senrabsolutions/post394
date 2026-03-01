@@ -1,85 +1,76 @@
 ---
-const { title = "American Legion Post 394" } = Astro.props;
----
-<!DOCTYPE html>
+import ALEmblem from "../assets/ALEmblem.png";
+
+const title = Astro.props.title ?? "American Legion Post 394";
+const description =
+  Astro.props.description ?? "Supporting Veterans. Serving Palm Bay. Building Community.";
+---<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title}</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0d1326;
-      color: white;
-    }
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
 
-    header {
-      background: #101a40;
-      padding: 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+  <body>
+    <header class="header">
+      <div class="container header__inner">
+        <a class="brand" href="/">
+          <img class="brand__logo" src={ALEmblem.src} alt="American Legion emblem" />
+          <span class="brand__text">
+            <strong>American Legion Post 394</strong>
+            <span>Palm Bay, FL</span>
+          </span>
+        </a>
 
-    nav a {
-      color: white;
-      margin-left: 16px;
-      text-decoration: none;
-    }
+        <nav class="nav" aria-label="Primary">
+          <a href="/events">Events</a>
+          <a href="/get-help">Get Help</a>
+          <a href="/hall">Hall Rental</a>
+          <a href="/join">Join</a>
+          <a class="btn btn--small" href="/contact">Contact</a>
+        </nav>
+      </div>
+    </header>
 
-    nav a:hover {
-      text-decoration: underline;
-    }
+    <main class="main">
+      <slot />
+    </main>
 
-    .hero {
-      padding: 60px 20px;
-      text-align: center;
-      background: #162060;
-    }
+    <footer class="footer">
+      <div class="container footer__grid">
+        <div>
+          <h3>Post 394</h3>
+          <p class="muted">
+            Supporting veterans through outreach, events, and service in the Palm Bay community.
+          </p>
+        </div>
 
-    .btn {
-      display: inline-block;
-      margin: 10px;
-      padding: 12px 20px;
-      background: #ffd700;
-      color: black;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-    }
+        <div>
+          <h3>Quick Links</h3>
+          <ul class="muted">
+            <li><a href="/events">Upcoming Events</a></li>
+            <li><a href="/get-help">Veteran Resources</a></li>
+            <li><a href="/hall">Rent the Hall</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
 
-    .section {
-      padding: 40px 20px;
-      text-align: center;
-    }
+        <div>
+          <h3>Contact</h3>
+          <p class="muted">
+            Address: (add)<br />
+            Phone: (add)<br />
+            Email: (add)
+          </p>
+        </div>
+      </div>
 
-    footer {
-      background: #101a40;
-      padding: 20px;
-      text-align: center;
-    }
-  </style>
-</head>
-<body>
-
-<header>
-  <h2>American Legion Post 394</h2>
-  <nav>
-    <a href="/">Home</a>
-    <a href="/events">Events</a>
-    <a href="/hall">Hall Rental</a>
-    <a href="/join">Join</a>
-    <a href="/contact">Contact</a>
-  </nav>
-</header>
-
-<slot />
-
-<footer>
-  © {new Date().getFullYear()} American Legion Post 394
-</footer>
-
-</body>
+      <div class="container footer__bottom">
+        <small class="muted">© {new Date().getFullYear()} American Legion Post 394.</small>
+      </div>
+    </footer>
+  </body>
 </html>

@@ -1,0 +1,184 @@
+:root{
+  /* Patriotic palette */
+  --navy:#0b1b3a;
+  --navy2:#0a1630;
+  --red:#b31942;
+  --gold:#c9a227;
+  --paper:#f4f1ea;
+
+  --bg: var(--navy2);
+  --card: rgba(255,255,255,.06);
+  --text: #f7f7fb;
+  --muted: rgba(255,255,255,.78);
+  --line: rgba(255,255,255,.14);
+
+  --max:1100px;
+  --radius:18px;
+  --shadow: 0 16px 40px rgba(0,0,0,.35);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  background:
+    /* subtle "flag fold" lighting */
+    radial-gradient(1200px 700px at 20% 0%, rgba(201,162,39,.10), transparent 55%),
+    radial-gradient(900px 600px at 85% 10%, rgba(179,25,66,.10), transparent 55%),
+    linear-gradient(180deg, var(--navy) 0%, var(--navy2) 55%, #071026 100%);
+  color:var(--text);
+  line-height:1.5;
+}
+
+a{color:inherit; text-decoration:none}
+a:hover{opacity:.92}
+
+.container{max-width:var(--max); margin:0 auto; padding:0 18px}
+.muted{color:var(--muted)}
+
+.header{
+  position:sticky; top:0; z-index:100;
+  background: rgba(10,22,48,.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(201,162,39,.28);
+}
+.header::before{
+  content:"";
+  display:block;
+  height:2px;
+  background: linear-gradient(to right,
+    rgba(201,162,39,.85) 0%,
+    rgba(201,162,39,.85) 100%);
+}
+.header::after{
+  content:"";
+  display:block;
+  height:1px;
+  background: rgba(179,25,66,.35);
+}
+.header__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:12px 0;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}.brand__logo{
+  height:46px;
+  width:auto;
+  display:block;
+  margin-right:10px;
+  object-fit:contain;
+}
+.brand__mark::after{
+  content:"★";
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  color:#0b1b3a;
+  font-size:18px;
+  font-weight:bold;
+}
+.brand__text{display:flex; flex-direction:column; font-size:14px}
+.brand__text span{color:var(--muted); font-size:12px}
+
+.nav{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+.nav a{padding:8px 10px; border-radius:12px}
+.nav a:hover{background:rgba(255,255,255,.06)}
+
+.main{padding:34px 0 56px}
+
+.card{
+  background: rgba(18,26,51,.78);
+  border:1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.pad{padding:22px}
+
+.kicker{color:var(--accent2); letter-spacing:.08em; text-transform:uppercase; font-size:12px}
+.h1{font-size:44px; margin:.35rem 0 .75rem; line-height:1.08}
+@media (max-width: 560px){ .h1{font-size:34px} }
+
+.hero{
+  display:grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap:18px;
+  align-items:stretch;
+}
+.hero{
+  border-bottom:1px solid rgba(201,162,39,.25);
+  padding-bottom:24px;
+  margin-bottom:24px;
+}
+@media (max-width: 860px){ .hero{grid-template-columns:1fr} }
+
+.grid{
+  display:grid; gap:14px;
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 900px){ .grid{grid-template-columns:1fr} }
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:8px; padding:12px 14px; border-radius:14px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,.06);
+}
+.btn:hover{
+  background: rgba(255,255,255,.10);
+  border-color: rgba(179,25,66,.25);
+}.btn--primary{
+  background: linear-gradient(180deg, rgba(201,162,39,.95), rgba(201,162,39,.78));
+  border-color: rgba(201,162,39,.55);
+  color: #08142c;
+  font-weight: 700;
+}
+.btn--primary:hover{
+  filter: brightness(1.03);
+}
+.btn--small{padding:8px 10px; border-radius:12px}
+
+.pill{
+  display:inline-flex; gap:8px; align-items:center;
+  padding:10px 12px; border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.05);
+  margin:6px 8px 0 0;
+}
+
+.section{margin-top:18px}
+.section h2{margin:0 0 8px}
+.section p{margin:0}
+
+.footer{
+  border-top: 1px solid rgba(201,162,39,.28);
+  padding: 28px 0 18px;
+  background: #071026; /* solid navy to prevent the light rectangle */
+}
+.footer__grid{
+  display:grid; gap:18px;
+  grid-template-columns: 1.2fr .8fr .8fr;
+}
+.footer__grid{
+  background: transparent;
+}
+@media (max-width: 860px){ .footer__grid{grid-template-columns:1fr} }
+.footer__bottom{
+  padding-top:16px;
+  border-top:1px solid rgba(201,162,39,.22); /* gold line, not white */
+  margin-top:18px;
+  background: transparent;
+}
+.footer{
+  border-top: 1px solid rgba(201,162,39,.28);
+  padding: 28px 0 18px;
+  background: #071026;
+  box-shadow: 0 -18px 40px rgba(0,0,0,.35);
+}
