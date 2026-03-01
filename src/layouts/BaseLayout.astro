@@ -1,0 +1,85 @@
+---
+const { title = "American Legion Post 394" } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0d1326;
+      color: white;
+    }
+
+    header {
+      background: #101a40;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 16px;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      padding: 60px 20px;
+      text-align: center;
+      background: #162060;
+    }
+
+    .btn {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 20px;
+      background: #ffd700;
+      color: black;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    footer {
+      background: #101a40;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h2>American Legion Post 394</h2>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/events">Events</a>
+    <a href="/hall">Hall Rental</a>
+    <a href="/join">Join</a>
+    <a href="/contact">Contact</a>
+  </nav>
+</header>
+
+<slot />
+
+<footer>
+  © {new Date().getFullYear()} American Legion Post 394
+</footer>
+
+</body>
+</html>
