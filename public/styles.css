@@ -398,3 +398,21 @@ a:hover{opacity:.92}
 .newsItem h3{
   letter-spacing:.01em;
 }
+
+.twoColList{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:10px;
+}
+.twoColList > div{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 12px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;
+  background: rgba(255,255,255,.04);
+}
+.twoColList > div span{
+  color: rgba(255,255,255,.78);
+}
