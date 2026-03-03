@@ -133,6 +133,48 @@ a:hover{opacity:.92}
   padding-bottom:24px;
   margin-bottom:24px;
 }
+.hero .card:first-child{
+  position:relative;
+  overflow:hidden;
+}
+
+.hero .card:first-child::before{
+  content:"";
+  position:absolute;
+  inset:-40px;
+  background:
+    linear-gradient(90deg,
+      rgba(179,25,66,.12) 0%,
+      rgba(179,25,66,.12) 10%,
+      rgba(255,255,255,.08) 10%,
+      rgba(255,255,255,.08) 20%,
+      rgba(179,25,66,.12) 20%,
+      rgba(179,25,66,.12) 30%,
+      rgba(255,255,255,.08) 30%,
+      rgba(255,255,255,.08) 40%,
+      rgba(179,25,66,.12) 40%,
+      rgba(179,25,66,.12) 50%,
+      rgba(255,255,255,.08) 50%,
+      rgba(255,255,255,.08) 60%,
+      rgba(179,25,66,.12) 60%,
+      rgba(179,25,66,.12) 70%,
+      rgba(255,255,255,.08) 70%,
+      rgba(255,255,255,.08) 80%,
+      rgba(179,25,66,.12) 80%,
+      rgba(179,25,66,.12) 90%,
+      rgba(255,255,255,.08) 90%,
+      rgba(255,255,255,.08) 100%
+    );
+  transform: rotate(-10deg);
+  opacity:100%;
+  pointer-events:none;
+  mask-image: radial-gradient(circle at 30% 30%, black 0%, transparent 70%);
+}
+
+.hero .card:first-child .pad{
+  position:relative;
+  z-index:1;
+}
 @media (max-width: 860px){ .hero{grid-template-columns:1fr} }
 
 .grid{
@@ -208,9 +250,150 @@ a:hover{opacity:.92}
   background: #071026;
   box-shadow: 0 -18px 40px rgba(0,0,0,.35);
 }
+.mapWrap{
+  margin-top:12px;
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid rgba(201,162,39,.22);
+  background: rgba(255,255,255,.04);
+}
+.mapWrap iframe{
+  width:100%;
+  height:160px;
+  border:0;
+  display:block;
+  filter: saturate(0.95) contrast(1.05);
+}
 
 .h2rule{
   display:inline-block;
   padding-bottom:8px;
   border-bottom:2px solid rgba(201,162,39,.55);
+}
+
+.calWrap{
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid rgba(201,162,39,.22);
+  background: rgba(255,255,255,.04);
+}
+.calWrap iframe{
+  width:100%;
+  height:720px;
+  border:0;
+  display:block;
+}
+.calWrap{
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid rgba(201,162,39,.28);
+  background: rgba(255,255,255,.04);
+  box-shadow: 0 18px 40px rgba(0,0,0,.35);
+  position:relative;
+}
+
+/* bulletin board "frame" */
+.calWrap::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border:6px solid rgba(201,162,39,.14);
+  border-radius:16px;
+  pointer-events:none;
+}
+
+.calWrap iframe{
+  width:100%;
+  height:720px;
+  border:0;
+  display:block;
+  background:white; /* calendar loads on white */
+}
+
+@media (max-width: 860px){
+  .calWrap iframe{ height: 820px; }
+}
+@media (max-width: 860px){
+  .calWrap iframe{ height: 820px; }
+}
+
+.form{
+  display:grid;
+  gap:12px;
+}
+.form label span{
+  display:block;
+  font-size:12px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color: rgba(255,255,255,.72);
+  margin-bottom:6px;
+}
+.form input, .form textarea{
+  width:100%;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+  outline: none;
+}
+.form input:focus, .form textarea:focus{
+  border-color: rgba(201,162,39,.40);
+}
+.formRow{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:12px;
+}
+@media (max-width: 860px){
+  .formRow{ grid-template-columns: 1fr; }
+}
+.photoStrip{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:14px;
+  margin-top:18px;
+}
+.photo{
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid rgba(201,162,39,.22);
+  background: rgba(255,255,255,.04);
+  box-shadow: 0 12px 28px rgba(0,0,0,.28);
+}
+.photo img{
+  width:100%;
+  height:210px;
+  object-fit:cover;
+  display:block;
+}
+.photo .cap{
+  padding:10px 12px;
+  font-weight:700;
+  letter-spacing:.01em;
+}
+.photo .cap span{
+  display:block;
+  font-weight:500;
+  color: rgba(255,255,255,.75);
+  font-size:12px;
+  margin-top:2px;
+}
+@media (max-width: 900px){
+  .photoStrip{ grid-template-columns: 1fr; }
+  .photo img{ height:220px; }
+}
+.newsList{
+  display:grid;
+  gap:12px;
+}
+.newsItem{
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  padding:14px;
+  background: rgba(255,255,255,.04);
+}
+.newsItem h3{
+  letter-spacing:.01em;
 }

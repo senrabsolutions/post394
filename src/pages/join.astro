@@ -2,21 +2,69 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Join Post 394">
+<BaseLayout title="Join • American Legion Post 394">
+  <div class="container">
+    <div class="card"><div class="pad">
+      <h1 style="margin:0 0 6px;">Join American Legion Post 394</h1>
+      <p class="muted" style="margin:0;">
+        Membership strengthens our mission: veterans serving veterans, and supporting Palm Bay through community service.
+      </p>
+    </div></div>
 
-<div class="section">
-  <h1>Join American Legion Post 394</h1>
-  <p>Support veterans and strengthen our community.</p>
-</div>
+    <div class="section">
+      <div class="grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="card"><div class="pad">
+          <h2 class="h2rule" style="margin:0 0 12px;">Why Join</h2>
+          <ul class="muted" style="margin:0; padding-left:18px;">
+            <li>Support local veteran outreach and advocacy</li>
+            <li>Access camaraderie, events, and service opportunities</li>
+            <li>Help fund programs that benefit veterans and the community</li>
+            <li>Be part of a respected national organization</li>
+          </ul>
 
-<div class="section">
-  <h2>Why Join?</h2>
-  <ul>
-    <li>Support veteran outreach</li>
-    <li>Build camaraderie</li>
-    <li>Volunteer opportunities</li>
-    <li>Community impact</li>
-  </ul>
-</div>
+          <div style="margin-top:14px;">
+            <a class="btn btn--primary" href="/contact">Contact Us to Join</a>
+          </div>
+        </div></div>
 
+        <div class="card"><div class="pad">
+          <h2 class="h2rule" style="margin:0 0 12px;">Eligibility</h2>
+          <p class="muted" style="margin:0 0 12px;">
+            Eligibility is based on U.S. military service and specific periods of service.
+            If you’re unsure, we’ll help you confirm.
+          </p>
+
+          <ul class="muted" style="margin:0; padding-left:18px;">
+            <li>Bring proof of service (DD-214 or VA ID if applicable)</li>
+            <li>We’ll guide you through membership options</li>
+          </ul>
+
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn" href="/events">See Events</a>
+            <a class="btn" href="/get-help">Veteran Resources</a>
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="card"><div class="pad">
+        <h2 class="h2rule" style="margin:0 0 12px;">What to Expect</h2>
+        <div class="grid" style="grid-template-columns: repeat(3, 1fr);">
+          <div class="card"><div class="pad">
+            <strong>Meet the Post</strong>
+            <p class="muted" style="margin:8px 0 0;">Introduce yourself, tour the space, and get connected.</p>
+          </div></div>
+          <div class="card"><div class="pad">
+            <strong>Choose how you serve</strong>
+            <p class="muted" style="margin:8px 0 0;">Volunteer, participate in events, or support behind the scenes.</p>
+          </div></div>
+          <div class="card"><div class="pad">
+            <strong>Stay informed</strong>
+            <p class="muted" style="margin:8px 0 0;">Check the calendar and announcements for meetings and activities.</p>
+          </div></div>
+        </div>
+      </div></div>
+    </div>
+  </div>
 </BaseLayout>

@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="News & Announcements • American Legion Post 394">
+  <div class="container">
+    <div class="card"><div class="pad">
+      <h1 style="margin:0 0 6px;">News & Announcements</h1>
+      <p class="muted" style="margin:0;">
+        Updates from Post 394 — events, notices, and community info.
+      </p>
+    </div></div>
+
+    <div class="section">
+      <div class="card"><div class="pad">
+        <h2 class="h2rule" style="margin:0 0 12px;">Latest</h2>
+
+        <div class="newsList">
+          <article class="newsItem">
+            <h3 style="margin:0 0 6px;">Monthly Membership Meeting</h3>
+            <p class="muted" style="margin:0 0 10px;">
+              Join us for updates, planning, and community discussion.
+            </p>
+            <small class="muted">Posted: (date)</small>
+          </article>
+
+          <article class="newsItem">
+            <h3 style="margin:0 0 6px;">Hall Rental Availability</h3>
+            <p class="muted" style="margin:0 0 10px;">
+              Planning a party or meeting? Submit a request and we’ll confirm dates.
+            </p>
+            <small class="muted">Posted: (date)</small>
+          </article>
+
+          <article class="newsItem">
+            <h3 style="margin:0 0 6px;">Service Officer Hours</h3>
+            <p class="muted" style="margin:0 0 10px;">
+              Need VA help? Check the Get Help page for current office hours.
+            </p>
+            <small class="muted">Posted: (date)</small>
+          </article>
+        </div>
+
+        <p class="muted" style="margin-top:14px;">
+          (Later: we can make this editable by leadership via a simple “posts” file or Google Doc feed.)
+        </p>
+      </div></div>
+    </div>
+  </div>
+</BaseLayout>

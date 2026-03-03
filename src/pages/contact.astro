@@ -2,17 +2,34 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Contact Post 394">
+<BaseLayout title="Contact • American Legion Post 394">
+  <div class="container">
+    <div class="card"><div class="pad">
+      <h1 style="margin:0 0 6px;">Contact</h1>
+      <p class="muted" style="margin:0 0 14px;">
+        Reach out with questions about membership, events, or hall rentals.
+      </p>
 
-<div class="section">
-  <h1>Contact Us</h1>
-  <p>Have questions? Reach out anytime.</p>
-</div>
+      <div class="grid" style="grid-template-columns:1fr 1fr;">
+        <div class="card"><div class="pad">
+          <h2 class="h2rule" style="margin:0 0 12px;">Contact Info</h2>
+          <p class="muted" style="margin:0;">
+            Address: <strong>396 COGAN DRIVE, PALM BAY, FL 32909</strong><br />
+            Phone: <strong>321-726-9777</strong><br />
+            Email: <strong>Coming Soon</strong>
+          </p>
+        </div></div>
 
-<div class="section">
-  <p>Email: info@post394.org</p>
-  <p>Phone: (Add phone later)</p>
-  <p>Address: (Add address later)</p>
-</div>
-
+        <div class="card"><div class="pad">
+          <h2 class="h2rule" style="margin:0 0 12px;">Quick Message</h2>
+          <form class="form" method="POST" action="https://formspree.io/f/YOUR_FORM_ID">
+            <label><span>Name</span><input name="name" required /></label>
+            <label><span>Email</span><input name="email" type="email" required /></label>
+            <label><span>Message</span><textarea name="message" rows="4" required></textarea></label>
+            <button class="btn btn--primary" type="submit">Send</button>
+          </form>
+        </div></div>
+      </div>
+    </div></div>
+  </div>
 </BaseLayout>

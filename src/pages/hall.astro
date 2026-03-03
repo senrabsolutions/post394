@@ -2,25 +2,82 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Hall Rental">
+<BaseLayout title="Hall Rental • American Legion Post 394">
+  <div class="container">
+    <div class="card"><div class="pad">
+      <h1 style="margin:0 0 6px;">Hall Rental</h1>
+      <p class="muted" style="margin:0;">
+        Host your event with Post 394. Request a date and we’ll contact you.
+      </p>
+    </div></div>
 
-<div class="section">
-  <h1>Rent Our Hall</h1>
-  <p>Perfect for parties, meetings, and community events.</p>
-</div>
+    <div class="section">
+      <div class="grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="card"><div class="pad">
+          <h2 class="h2rule" style="margin:0 0 12px;">Amenities</h2>
+          <ul class="muted" style="margin:0; padding-left:18px;">
+            <li>Kitchen access</li>
+            <li>Parking available</li>
+            <li>Tables & chairs (confirm count)</li>
+            <li>Audio/entertainment (if available)</li>
+          </ul>
 
-<div class="section">
-  <h2>Amenities</h2>
-  <ul>
-    <li>Kitchen access</li>
-    <li>Parking available</li>
-    <li>Entertainment space</li>
-    <li>Affordable rates</li>
-  </ul>
-</div>
+          <h2 class="h2rule" style="margin:18px 0 12px;">Notes</h2>
+          <ul class="muted" style="margin:0; padding-left:18px;">
+            <li>Rates and deposit policy provided upon request</li>
+            <li>Availability depends on Post events</li>
+          </ul>
+        </div></div>
 
-<div class="section">
-  <p>Contact us to check availability.</p>
-</div>
+        <div class="card"><div class="pad">
+          <h2 class="h2rule" style="margin:0 0 12px;">Request a Date</h2>
 
+          <!-- Formspree: replace action URL -->
+          <form class="form" method="POST" action="https://formspree.io/f/YOUR_FORM_ID">
+            <label>
+              <span>Name</span>
+              <input name="name" required />
+            </label>
+
+            <label>
+              <span>Email</span>
+              <input name="email" type="email" required />
+            </label>
+
+            <label>
+              <span>Phone</span>
+              <input name="phone" />
+            </label><br />
+
+            <label>
+              <span>Event Type</span>
+              <input name="event_type" placeholder="Birthday, meeting, fundraiser..." />
+            </label>
+
+            <div class="formRow">
+              <label>
+                <span>Preferred Date</span>
+                <input name="date" type="date" />
+              </label><br />
+
+              <label>
+                <span>Estimated Guests</span>
+                <input name="guests" type="number" min="1" />
+              </label>
+            </div><br />
+
+            <label>
+              <span>Message</span>
+              <textarea name="message" rows="4" placeholder="Tell us what you need..."></textarea>
+            </label>
+
+            <button class="btn btn--primary" type="submit">Send Request</button>
+            <p class="muted" style="margin-top:10px;">
+              You’ll receive a reply by email once availability is confirmed.
+            </p>
+          </form>
+        </div></div>
+      </div>
+    </div>
+  </div>
 </BaseLayout>

@@ -2,16 +2,53 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Events">
+<BaseLayout title="Events • American Legion Post 394">
+  <div class="container">
+    <div class="card"><div class="pad">
+      <h1 style="margin:0 0 6px;">Events</h1>
+      <p class="muted" style="margin:0;">
+        Weekly community nights, special events, and veteran-focused programs.
+      </p>
+    </div></div>
 
-<div class="section">
-  <h1>Post 394 Events</h1>
-  <p>Community nights, veteran support, and more.</p>
-</div>
+    <div class="section">
+      <div class="grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="card"><div class="pad">
+          <h2 class="h2rule" style="margin:0 0 12px;">Recurring Events</h2>
+          <ul class="muted" style="margin:0; padding-left:18px;">
+            <li><strong>Bingo Night</strong> • Tue 6:30 PM</li>
+            <li><strong>Karaoke</strong> • Fri 7:00 PM</li>
+            <li><strong>Service Officer Hours</strong> • Wed 10 AM – 2 PM</li>
+          </ul>
+          <p class="muted" style="margin-top:12px;">(Replace with your actual schedule.)</p>
+        </div></div>
 
-<div class="section">
-  <h2>Upcoming Events</h2>
-  <p>Calendar coming soon.</p>
-</div>
+        <div class="card"><div class="pad">
+          <h2 class="h2rule" style="margin:0 0 12px;">Special Events</h2>
+          <ul class="muted" style="margin:0; padding-left:18px;">
+            <li>Monthly membership meeting</li>
+            <li>Holiday/community fundraisers</li>
+            <li>Veteran outreach events</li>
+          </ul>
+          <p class="muted" style="margin-top:12px;">(We’ll pull these from the calendar once it’s set.)</p>
+        </div></div>
+      </div>
+    </div>
 
+    <div class="section">
+      <div class="card"><div class="pad">
+        <h2 class="h2rule" style="margin:0 0 12px;">Calendar</h2>
+
+        <div class="calWrap">
+          <!-- Replace src with the Google Calendar embed URL -->
+          <iframe
+            title="Post 394 Calendar"
+            loading="lazy"
+            src="https://calendar.google.com/calendar/embed?src=e42b344bb26640808bcfaa7394d8d86d4c4680017885a4a8f8e7524e93e5a050%40group.calendar.google.com&ctz=America%2FNew_York&mode=MONTH&showTitle=0&showPrint=0&showTabs=0&showCalendars=0" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"
+          ></iframe>
+        </div>
+
+      </div></div>
+    </div>
+  </div>
 </BaseLayout>

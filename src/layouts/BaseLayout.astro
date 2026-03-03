@@ -4,7 +4,8 @@ import ALEmblem from "../assets/ALEmblem.png";
 const title = Astro.props.title ?? "American Legion Post 394";
 const description =
   Astro.props.description ?? "Supporting Veterans. Serving Palm Bay. Building Community.";
----<!doctype html>
+---
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -27,6 +28,7 @@ const description =
 
         <nav class="nav" aria-label="Primary">
           <a href="/events">Events</a>
+          <a href="/news">News</a>
           <a href="/get-help">Get Help</a>
           <a href="/hall">Hall Rental</a>
           <a href="/join">Join</a>
@@ -61,11 +63,24 @@ const description =
         <div>
           <h3>Contact</h3>
           <p class="muted">
-            Address: (add)<br />
-            Phone: (add)<br />
-            Email: (add)
+            Address: <strong>396 COGAN DRIVE, PALM BAY, FL 32909<strong><br />
+            Phone: <strong>321-726-9777<strong><br />
+            Email: <strong>Coming Soon<strong>
           </p>
-        </div>
+
+          <div class="mapWrap">
+            <!-- Replace the src with your Google Maps embed link -->
+            <iframe
+              title="Post 394 Map"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3524.5416926801595!2d-80.66055062330717!3d27.94669207604624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88de72ed813f8cbb%3A0x60edbdeeb997839c!2sAmerican%20Legion%20Riders%20Chapter%20394!5e0!3m2!1sen!2sus!4v1772520554483!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>        </div>
+            <div style="margin-top:10px;">
+               <a class="btn btn--primary btn--small" target="_blank" rel="noreferrer"
+                href="https://www.google.com/maps/dir/?api=1&destination=396+Cogan+Dr,+Palm+Bay,+FL+32909">
+                Get Directions
+              </a>
+            </div>
       </div>
 
       <div class="container footer__bottom">
