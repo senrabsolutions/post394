@@ -1,5 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ALEmblem from "../assets/ALEmblem.png";
+
+const monthCalendarSrc =
+  "https://calendar.google.com/calendar/embed?src=e42b344bb26640808bcfaa7394d8d86d4c4680017885a4a8f8e7524e93e5a050%40group.calendar.google.com&ctz=America%2FNew_York&mode=MONTH&showTitle=0&showPrint=0&showCalendars=1&showTabs=1&showNav=1";
+
+const weekCalendarSrc =
+  "https://calendar.google.com/calendar/embed?src=e42b344bb26640808bcfaa7394d8d86d4c4680017885a4a8f8e7524e93e5a050%40group.calendar.google.com&ctz=America%2FNew_York&mode=WEEK&showTitle=0&showPrint=0&showCalendars=1&showTabs=1&showNav=1";
 ---
 
 <BaseLayout title="Events • American Legion Post 394">
@@ -20,34 +27,59 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             <li><strong>Karaoke</strong> • Fri 7:00 PM</li>
             <li><strong>Service Officer Hours</strong> • Wed 10 AM – 2 PM</li>
           </ul>
-          <p class="muted" style="margin-top:12px;">(Replace with your actual schedule.)</p>
+          <p class="muted" style="margin-top:12px;">Update these items as needed.</p>
         </div></div>
 
         <div class="card"><div class="pad">
           <h2 class="h2rule" style="margin:0 0 12px;">Special Events</h2>
           <ul class="muted" style="margin:0; padding-left:18px;">
             <li>Monthly membership meeting</li>
-            <li>Holiday/community fundraisers</li>
+            <li>Holiday and community fundraisers</li>
             <li>Veteran outreach events</li>
           </ul>
-          <p class="muted" style="margin-top:12px;">(We’ll pull these from the calendar once it’s set.)</p>
+          <p class="muted" style="margin-top:12px;">Use the calendar below for full details.</p>
         </div></div>
       </div>
     </div>
 
     <div class="section">
       <div class="card"><div class="pad">
-        <h2 class="h2rule" style="margin:0 0 12px;">Calendar</h2>
+        <div class="calendarHeader">
+          <div class="calendarTitleWrap">
+            <img class="calendarBadge" src={ALEmblem.src} alt="American Legion emblem" />
+            <div>
+              <h2 class="h2rule" style="margin:0 0 6px;">Post 394 Calendar</h2>
+              <p class="muted" style="margin:0;">
+                View the month at a glance, or switch to week view for busy event days.
+              </p>
+            </div>
+          </div>
 
-        <div class="calWrap">
-          <!-- Replace src with the Google Calendar embed URL -->
-          <iframe
-            title="Post 394 Calendar"
-            loading="lazy"
-            src="https://calendar.google.com/calendar/embed?src=e42b344bb26640808bcfaa7394d8d86d4c4680017885a4a8f8e7524e93e5a050%40group.calendar.google.com&ctz=America%2FNew_York&mode=MONTH&showTitle=0&showPrint=0&showTabs=0&showCalendars=0" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"
-          ></iframe>
+          <div class="calendarActions">
+            <button
+              class="btn btn--primary btn--small"
+              type="button"
+              onclick={`document.getElementById('post-calendar').src='${monthCalendarSrc}'`}>
+              Month View
+            </button>
+
+            <button
+              class="btn btn--small"
+              type="button"
+              onclick={`document.getElementById('post-calendar').src='${weekCalendarSrc}'`}>
+              Week View
+            </button>
+          </div>
         </div>
 
+        <div class="calWrap">
+          <iframe
+            id="post-calendar"
+            title="Post 394 Calendar"
+            loading="lazy"
+            src={monthCalendarSrc}
+          ></iframe>
+        </div>
       </div></div>
     </div>
   </div>
