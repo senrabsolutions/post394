@@ -21,16 +21,18 @@ const description =
         <a class="brand" href="/">
           <img class="brand__logo" src={ALEmblem.src} alt="American Legion emblem" />
           <span class="brand__text">
-            <strong>American Legion Post 394</strong><br />
-            <span>Palm Bay, FL</span>
+            <strong>American Legion Post 394</strong>
+            <span>Palm Bay, Florida</span>
           </span>
         </a>
 
         <nav class="nav" aria-label="Primary">
-          <a href="/officers">Officers</a>
+          <a href="/">Home</a>
           <a href="/events">Events</a>
           <a href="/news">News</a>
-          <a href="/get-help">Get Help</a>
+          <a href="/resources">Resources</a>
+          <a href="/documents">Documents</a>
+          <a href="/officers">Officers</a>
           <a href="/hall">Hall Rental</a>
           <a href="/join">Join</a>
           <a class="btn btn--small" href="/contact">Contact</a>
@@ -48,56 +50,56 @@ const description =
           <h3>Post 394</h3>
           <p class="muted">
             Supporting veterans through outreach, events, and service in the Palm Bay community.
-          </p><br />
-
-          <div>
-            <h3>Hours</h3>
-            <p class="muted">
-              <strong>Post / Canteen</strong><br />
-              Mon-Thu:  10am to 10pm<br />
-              Fri:      10am to 12am<br />
-              Sat:      10am to 10pm<br />
-              Sun:       8am to 10pm<br /><br />
-              <span style="opacity:.85;"><strong>***Hours subject to change.***</strong></span>
-            </p>
-          </div>
+          </p>
         </div>
 
         <div>
           <h3>Quick Links</h3>
-          <ul class="muted">
+          <ul class="muted" style="margin:0; padding-left:18px;">
             <li><a href="/events">Upcoming Events</a></li>
-            <li><a href="/get-help">Veteran Resources</a></li>
+            <li><a href="/news">News & Announcements</a></li>
+            <li><a href="/resources">Veteran Resources</a></li>
+            <li><a href="/documents">Documents</a></li>
             <li><a href="/hall">Rent the Hall</a></li>
-            <li><a href="/contact">Contact</a></li>
           </ul>
         </div>
 
         <div>
           <h3>Contact</h3>
           <p class="muted">
-            Address: <strong>396 COGAN DRIVE, PALM BAY, FL 32909<strong><br />
-            Phone: <strong>321-726-9777<strong><br />
-            Email: <strong>Coming Soon<strong>
+            Address:
+            <strong>
+              <a href="https://www.google.com/maps/search/?api=1&query=396+Cogan+Dr,+Palm+Bay,+FL+32909" target="_blank" rel="noreferrer">
+                396 Cogan Dr, Palm Bay, FL 32909
+              </a>
+            </strong><br />
+            Phone: <strong>(add phone)</strong><br />
+            Email: <strong>info@alpb394.org</strong>
           </p>
 
           <div class="mapWrap">
-            <!-- Replace the src with your Google Maps embed link -->
             <iframe
               title="Post 394 Map"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3524.5416926801595!2d-80.66055062330717!3d27.94669207604624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88de72ed813f8cbb%3A0x60edbdeeb997839c!2sAmerican%20Legion%20Riders%20Chapter%20394!5e0!3m2!1sen!2sus!4v1772520554483!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>        </div>
-            <div style="margin-top:10px;">
-               <a class="btn btn--primary btn--small" target="_blank" rel="noreferrer"
-                href="https://www.google.com/maps/dir/?api=1&destination=396+Cogan+Dr,+Palm+Bay,+FL+32909">
-                Get Directions
-              </a>
-            </div>
+              src="https://www.google.com/maps?q=396+Cogan+Dr,+Palm+Bay,+FL+32909&output=embed">
+            </iframe>
+          </div>
+
+          <div style="margin-top:10px;">
+            <a
+              class="btn btn--primary btn--small"
+              target="_blank"
+              rel="noreferrer"
+              href="https://www.google.com/maps/dir/?api=1&destination=396+Cogan+Dr,+Palm+Bay,+FL+32909">
+              Get Directions
+            </a>
+          </div>
+        </div>
       </div>
 
       <div class="container footer__bottom">
-        <small class="muted">© {new Date().getFullYear()} American Legion Post 394.</small>
+        <small class="muted">© {new Date().getFullYear()} American Legion Post 394. All rights reserved.</small>
       </div>
     </footer>
   </body>
