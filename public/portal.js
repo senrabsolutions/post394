@@ -20,7 +20,6 @@ if (
 ) {
   console.error("Portal elements not found.");
 } else {
-
   const supabaseUrl = portalBox.dataset.supabaseUrl;
   const supabaseAnonKey = portalBox.dataset.supabaseAnonKey;
 
@@ -32,33 +31,26 @@ if (
   const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
   async function loadPortal() {
-
     try {
-
       message.textContent = "Checking login...";
 
-      const { data, error } = await supabase.auth.getUser();
+      // Try the persisted session first
+      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+      console.log("PORTAL SESSION:", sessionData, sessionError);
 
-      console.log("AUTH USER:", data, error);
+      let user = sessionData?.session?.user ?? null;
 
-      if (error || !data.user) {
-        window.location.href = "/login";
-        return;
+      // Fallback to getUser if needed
+      if (!user) {
+        const { data: userData, error: userError } = await supabase.auth.getUser();
+        console.log("PORTAL USER:", userData, userError);
+        user = userData?.user ?? null;
       }
 
-      const user = data.user;
-
-      console.log("AUTH USER ID:", user.id);
-      console.log("AUTH USER EMAIL:", user.email);
-
-      /*
-      ---------------------------------------
-      PROFILE LOOKUP
-      ---------------------------------------
-      Using email instead of UUID because
-      most Supabase setups forget to sync
-      profiles.id with auth.users.id.
-      */
+      if (!user) {
+        window.location.replace("/login");
+        return;
+      }
 
       const { data: profile, error: profileError } = await supabase
         .from("profiles")
@@ -66,8 +58,7 @@ if (
         .eq("id", user.id)
         .single();
 
-      console.log("PROFILE RESULT:", profile);
-      console.log("PROFILE ERROR:", profileError);
+      console.log("PORTAL PROFILE:", profile, profileError);
 
       if (profileError) {
         message.textContent = "Profile lookup failed: " + profileError.message;
@@ -75,7 +66,7 @@ if (
       }
 
       if (!profile) {
-        message.textContent = "No profile record exists for this email.";
+        message.textContent = "No profile record was found for this user.";
         return;
       }
 
@@ -83,8 +74,6 @@ if (
         message.textContent = "This account exists but is not active.";
         return;
       }
-
-      /* ------------------------------------ */
 
       nameEl.textContent = profile.full_name || "";
       roleEl.textContent = profile.role || "";
@@ -118,11 +107,8 @@ if (
 
       message.style.display = "none";
       content.style.display = "block";
-
     } catch (err) {
-
       console.error("PORTAL LOAD ERROR:", err);
-
       message.textContent =
         err instanceof Error
           ? "Portal error: " + err.message
@@ -131,24 +117,16 @@ if (
   }
 
   if (logoutBtn instanceof HTMLButtonElement) {
-
-    logoutBtn.addEventListener("click", async () => {
-
+    logoutBtn.addEventListener("click", async function () {
       try {
-
         await supabase.auth.signOut();
-        window.location.href = "/login";
-
+        window.location.replace("/login");
       } catch (err) {
-
         console.error("LOGOUT ERROR:", err);
-
         message.style.display = "block";
         message.textContent = "Unable to log out right now.";
       }
-
     });
-
   }
 
   loadPortal();
