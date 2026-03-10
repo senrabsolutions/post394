@@ -25,6 +25,10 @@ if (
 
   const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
   async function handleLogin() {
     const email = emailInput.value.trim();
     const password = passwordInput.value;
@@ -54,19 +58,18 @@ if (
         return;
       }
 
-      // Give the browser a moment to persist the session before leaving the page
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await sleep(1000);
 
-      const { data: sessionCheck } = await supabase.auth.getSession();
-      console.log("SESSION AFTER LOGIN:", sessionCheck);
+      const { data: sessionCheck, error: sessionCheckError } = await supabase.auth.getSession();
+      console.log("SESSION AFTER LOGIN:", sessionCheck, sessionCheckError);
 
-      if (!sessionCheck.session) {
-        message.textContent = "Login succeeded, but the session was not persisted yet. Try again.";
+      if (!sessionCheck?.session) {
+        message.textContent = "Login succeeded, but the session was not ready yet. Try again.";
         return;
       }
 
       message.textContent = "Login successful. Redirecting...";
-      window.location.replace("/portal");
+      window.location.href = "/portal";
     } catch (err) {
       console.error("LOGIN ERROR:", err);
       message.textContent =

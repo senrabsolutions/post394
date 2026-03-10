@@ -30,83 +30,108 @@ if (
 
   const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async function getStableUser() {
+    for (let attempt = 1; attempt <= 8; attempt++) {
+      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+      console.log("SESSION ATTEMPT", attempt, sessionData, sessionError);
+
+      const sessionUser = sessionData?.session?.user ?? null;
+      if (sessionUser) {
+        return sessionUser;
+      }
+
+      const { data: userData, error: userError } = await supabase.auth.getUser();
+      console.log("USER ATTEMPT", attempt, userData, userError);
+
+      const apiUser = userData?.user ?? null;
+      if (apiUser) {
+        return apiUser;
+      }
+
+      if (attempt < 8) {
+        await sleep(400);
+      }
+    }
+
+    return null;
+  }
+
+  async function renderPortalForUser(user) {
+    const { data: profile, error: profileError } = await supabase
+      .from("profiles")
+      .select("full_name, role, is_active")
+      .eq("id", user.id)
+      .single();
+
+    console.log("PORTAL PROFILE:", profile, profileError);
+
+    if (profileError) {
+      message.textContent = "Profile lookup failed: " + profileError.message;
+      return;
+    }
+
+    if (!profile) {
+      message.textContent = "No profile record was found for this user.";
+      return;
+    }
+
+    if (!profile.is_active) {
+      message.textContent = "This account exists but is not active.";
+      return;
+    }
+
+    nameEl.textContent = profile.full_name || "";
+    roleEl.textContent = profile.role || "";
+
+    const links = [];
+    const summary = [];
+
+    links.push('<li><a href="/portal">Dashboard</a></li>');
+
+    if (profile.role === "media_admin" || profile.role === "super_admin") {
+      links.push('<li><a href="/portal/media">Media Dashboard</a></li>');
+      summary.push("<li>Media and announcements access</li>");
+    }
+
+    if (
+      profile.role === "commander" ||
+      profile.role === "vice1" ||
+      profile.role === "vice2" ||
+      profile.role === "super_admin"
+    ) {
+      summary.push("<li>Leadership review access</li>");
+    }
+
+    if (profile.role === "super_admin") {
+      links.push('<li><a href="/portal/admin">Super Admin</a></li>');
+      summary.push("<li>User administration access</li>");
+    }
+
+    linksEl.innerHTML = links.join("");
+    summaryEl.innerHTML = summary.join("");
+
+    message.style.display = "none";
+    content.style.display = "block";
+  }
+
   async function loadPortal() {
     try {
       message.textContent = "Checking login...";
 
-      // Try the persisted session first
-      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
-      console.log("PORTAL SESSION:", sessionData, sessionError);
-
-      let user = sessionData?.session?.user ?? null;
-
-      // Fallback to getUser if needed
-      if (!user) {
-        const { data: userData, error: userError } = await supabase.auth.getUser();
-        console.log("PORTAL USER:", userData, userError);
-        user = userData?.user ?? null;
-      }
+      const user = await getStableUser();
 
       if (!user) {
-        window.location.replace("/login");
+        message.textContent = "No session found. Redirecting to login...";
+        await sleep(800);
+        window.location.href = "/login";
         return;
       }
 
-      const { data: profile, error: profileError } = await supabase
-        .from("profiles")
-        .select("full_name, role, is_active")
-        .eq("id", user.id)
-        .single();
-
-      console.log("PORTAL PROFILE:", profile, profileError);
-
-      if (profileError) {
-        message.textContent = "Profile lookup failed: " + profileError.message;
-        return;
-      }
-
-      if (!profile) {
-        message.textContent = "No profile record was found for this user.";
-        return;
-      }
-
-      if (!profile.is_active) {
-        message.textContent = "This account exists but is not active.";
-        return;
-      }
-
-      nameEl.textContent = profile.full_name || "";
-      roleEl.textContent = profile.role || "";
-
-      const links = [];
-      const summary = [];
-
-      links.push('<li><a href="/portal">Dashboard</a></li>');
-
-      if (profile.role === "media_admin" || profile.role === "super_admin") {
-        links.push('<li><a href="/portal/media">Media Dashboard</a></li>');
-        summary.push("<li>Media and announcements access</li>");
-      }
-
-      if (
-        profile.role === "commander" ||
-        profile.role === "vice1" ||
-        profile.role === "vice2" ||
-        profile.role === "super_admin"
-      ) {
-        summary.push("<li>Leadership review access</li>");
-      }
-
-      if (profile.role === "super_admin") {
-        links.push('<li><a href="/portal/admin">Super Admin</a></li>');
-        summary.push("<li>User administration access</li>");
-      }
-
-      linksEl.innerHTML = links.join("");
-      summaryEl.innerHTML = summary.join("");
-
-      message.style.display = "none";
-      content.style.display = "block";
+      await renderPortalForUser(user);
     } catch (err) {
       console.error("PORTAL LOAD ERROR:", err);
       message.textContent =
@@ -116,11 +141,27 @@ if (
     }
   }
 
+  supabase.auth.onAuthStateChange(async (event, session) => {
+    console.log("AUTH STATE CHANGE:", event, session);
+
+    if (event === "SIGNED_OUT") {
+      window.location.href = "/login";
+      return;
+    }
+
+    if (
+      (event === "SIGNED_IN" || event === "INITIAL_SESSION" || event === "TOKEN_REFRESHED") &&
+      session?.user
+    ) {
+      await renderPortalForUser(session.user);
+    }
+  });
+
   if (logoutBtn instanceof HTMLButtonElement) {
     logoutBtn.addEventListener("click", async function () {
       try {
         await supabase.auth.signOut();
-        window.location.replace("/login");
+        window.location.href = "/login";
       } catch (err) {
         console.error("LOGOUT ERROR:", err);
         message.style.display = "block";
