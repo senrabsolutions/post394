@@ -1,0 +1,142 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { createSupabaseServerClient } from "../../lib/supabase/server";
+
+const supabase = createSupabaseServerClient(Astro);
+
+const {
+  data: { user }
+} = await supabase.auth.getUser();
+
+if (!user) {
+  return Astro.redirect("/login");
+}
+
+const { data: profile } = await supabase
+  .from("profiles")
+  .select("full_name, role, is_active")
+  .eq("id", user.id)
+  .single();
+
+if (!profile || !profile.is_active || profile.role !== "super_admin") {
+  return Astro.redirect("/portal");
+}
+---
+
+<script type="module">
+  import { createClient } from "@supabase/supabase-js";
+
+  const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+
+  const message = document.getElementById("admin-message");
+  const content = document.getElementById("admin-content");
+  const userList = document.getElementById("user-list");
+  const logoutBtn = document.getElementById("logout-btn");
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    if (message) {
+      message.textContent = "Supabase environment variables are missing.";
+    }
+    throw new Error("Missing PUBLIC_SUPABASE_URL or PUBLIC_SUPABASE_ANON_KEY.");
+  }
+
+  const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+  async function loadAdmin() {
+    try {
+      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+
+      if (sessionError) {
+        throw sessionError;
+      }
+
+      if (!sessionData.session) {
+        window.location.href = "/login";
+        return;
+      }
+
+      const user = sessionData.session.user;
+
+      const { data: profile, error: profileError } = await supabase
+        .from("profiles")
+        .select("role, is_active")
+        .eq("id", user.id)
+        .single();
+
+      if (
+        profileError ||
+        !profile ||
+        !profile.is_active ||
+        profile.role !== "super_admin"
+      ) {
+        if (message) {
+          message.textContent = "You are not authorized to view this page.";
+        }
+        return;
+      }
+
+      const { data: users, error: usersError } = await supabase
+        .from("profiles")
+        .select("id, full_name, email, role, is_active")
+        .order("full_name", { ascending: true });
+
+      if (usersError) {
+        throw usersError;
+      }
+
+      if (message) {
+        message.style.display = "none";
+      }
+
+      if (content) {
+        content.style.display = "block";
+      }
+
+      if (userList) {
+        if (!users || users.length === 0) {
+          userList.innerHTML = "<li>No users found.</li>";
+        } else {
+          userList.innerHTML = users
+            .map(function (u) {
+              const fullName = u.full_name || "Unnamed User";
+              const email = u.email || "No email";
+              const role = u.role || "No role";
+              const status = u.is_active ? "Active" : "Inactive";
+
+              return "<li><strong>" + fullName + "</strong> (" + email + ") — " + role + " — " + status + "</li>";
+            })
+            .join("");
+        }
+      }
+    } catch (error) {
+      console.error("Admin load error:", error);
+
+      if (message) {
+        message.style.display = "block";
+        message.textContent =
+          error instanceof Error
+            ? error.message
+            : "An unexpected error occurred while loading the admin page.";
+      }
+    }
+  }
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", async function () {
+      try {
+        await supabase.auth.signOut();
+        window.location.href = "/login";
+      } catch (error) {
+        console.error("Logout error:", error);
+
+        if (message) {
+          message.style.display = "block";
+          message.textContent = "Unable to log out right now. Please try again.";
+        }
+      }
+    });
+  }
+
+  loadAdmin();
+</script>

@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+---
+
+<BaseLayout title="Staff Portal • American Legion Post 394">
+  <div class="container">
+    <div class="card">
+      <div
+        class="pad"
+        id="portal-box"
+        data-supabase-url={supabaseUrl}
+        data-supabase-anon-key={supabaseAnonKey}
+      >
+        <h1 style="margin:0 0 8px;">Staff Portal</h1>
+        <p id="portal-message" class="muted" style="margin:0 0 18px;">
+          Checking login...
+        </p>
+
+        <div id="portal-content" style="display:none;">
+          <p class="muted" style="margin:0 0 14px;">
+            Welcome, <strong id="portal-name"></strong>
+          </p>
+
+          <p class="muted" style="margin:0 0 18px;">
+            Role: <strong id="portal-role"></strong>
+          </p>
+
+          <div class="grid" style="grid-template-columns:repeat(2,1fr);">
+            <div class="card">
+              <div class="pad">
+                <h2 class="h2rule" style="margin:0 0 12px;">Portal Access</h2>
+                <ul id="portal-links" class="muted" style="margin:0; padding-left:18px;"></ul>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="pad">
+                <h2 class="h2rule" style="margin:0 0 12px;">Demo Access Summary</h2>
+                <ul id="portal-summary" class="muted" style="margin:0; padding-left:18px;"></ul>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px;">
+            <button id="logout-btn" class="btn btn--small" type="button">Log Out</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/portal.js"></script>
+</BaseLayout>
